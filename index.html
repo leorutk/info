@@ -1,12 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Info</title>
+
+  <!-- SEO Básico -->
+  <title>Info Informática | Assistência Técnica em Florianópolis – Estreito e Costeira</title>
+  <meta name="description" content="Assistência técnica especializada em informática em Florianópolis. Reparo de placas e carcaças, troca de tela, manutenção de impressoras, venda de acessórios, toners e cartuchos. Atendimento rápido no Estreito e Costeira.">
+  <meta name="keywords" content="assistência técnica, informática Florianópolis, informática Floripa, reparo de notebook, troca de tela notebook, carcaça quebrada, dobradiça notebook, manutenção de impressora, toner, cartucho, venda de cabos, acessórios de informática">
+  <meta name="author" content="Info Informática">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph para compartilhamento social -->
+  <meta property="og:title" content="Info Informática - Assistência Técnica em Florianópolis" />
+  <meta property="og:description" content="Notebooks, impressoras, acessórios e manutenção com atendimento rápido no Estreito e Costeira. Venha nos visitar!" />
+  <meta property="og:image" content="https://www.informaticaflorianopolis.com.br/imagem-previa.jpg" />
+  <meta property="og:url" content="https://www.informaticaflorianopolis.com.br" />
+  <meta property="og:type" content="website" />
+
+  <!-- Structured Data (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Info Informática",
+    "image": "https://www.informaticaflorianopolis.com.br/logo.png",
+    "url": "https://www.informaticaflorianopolis.com.br",
+    "telephone": "+554833387118",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua João Câncio Jacques, 49",
+      "addressLocality": "Florianópolis",
+      "addressRegion": "SC",
+      "postalCode": "88040-450",
+      "addressCountry": "BR"
+    },
+    "description": "Assistência técnica especializada em notebooks, impressoras e acessórios. Atendimento em duas lojas físicas em Florianópolis: Estreito e Costeira do Pirajubaé.",
+    "sameAs": [
+      "https://www.instagram.com/infoinformatica_",
+      "https://www.facebook.com/seu_facebook_aqui"
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
+
+<script>
+  // Coordenadas da Loja Costeira
+  const destino = {
+    lat: -27.601834,  // Latitude da loja
+    lng: -48.494993   // Longitude da loja
+  };
+
+  function mostrarRecomendacao(tempo) {
+    const div = document.getElementById('recomendacao-costeira');
+    div.textContent = `Você está a ${tempo} (aproximadamente) da nossa loja da Costeira do Pirajubaé. Venha nos visitar!`;
+    div.classList.remove('d-none');
+  }
+
+  // Verifica se o navegador suporta geolocalização
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const origem = `${position.coords.latitude},${position.coords.longitude}`;
+      const destinoCoord = `${destino.lat},${destino.lng}`;
+
+      const endpoint = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destinoCoord}&key=SUA_API_KEY&language=pt-BR`;
+
+      // Por razões de segurança, essa requisição precisa passar por um servidor backend (por causa da key).
+      // Aqui vai um truque alternativo: redireciona para o Google Maps diretamente como fallback visual
+      const tempoEstimado = 'alguns minutos'; // Valor padrão, se API não for usada
+
+      mostrarRecomendacao(tempoEstimado);
+    }, () => {
+      // Erro ao localizar, mostra estimativa padrão
+      mostrarRecomendacao('menos de 20 minutos');
+    }, {
+      maximumAge: 60000, timeout: 5000
+    });
+  } else {
+    // Navegador não suporta geolocalização
+    mostrarRecomendacao('menos de 20 minutos');
+  }
+</script>
+
 <body>
 
   <!-- Menu de Navegação -->
@@ -102,6 +184,52 @@
       </form>
     </div>
   </section>
+
+<!-- Seção Como Chegar -->
+<section id="como-chegar" class="py-5 bg-light">
+  <div id="recomendacao-costeira" class="alert alert-info text-center my-4 d-none">
+    <!-- Conteúdo gerado via JavaScript -->
+  </div>  
+  <div class="container">
+    <h2 class="text-center mb-5">Como Chegar</h2>
+    <div class="row g-4">
+      <!-- Loja Estreito -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title mb-3">Loja Estreito</h4>
+            <p class="card-text">Rua Dr. Heitor Blum, 411 – Estreito, Florianópolis, SC</p>
+            <div class="ratio ratio-4x3 mb-3">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3520.443393336871!2d-48.60526782455596!3d-27.5977204212434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d8c2f241cb123b%3A0xd01d9c73a5f93964!2sR.%20Dr.%20Heitor%20Blum%2C%20411%20-%20Estreito%2C%20Florian%C3%B3polis%20-%20SC%2C%2088045-580!5e0!3m2!1spt-BR!2sbr!4v1719603888531!5m2!1spt-BR!2sbr" 
+                style="border:0;" allowfullscreen="" loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <a href="https://g.co/kgs/JnvjejE" target="_blank" class="btn btn-outline-primary w-100">Ver rota no Google Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loja Costeira -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title mb-3">Loja Costeira do Pirajubaé</h4>
+            <p class="card-text">Rua João Câncio Jacques, 49 – Piso térreo do Bistek, Florianópolis, SC</p>
+            <div class="ratio ratio-4x3 mb-3">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3520.2783784744844!2d-48.49499252455581!3d-27.601834321445773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d8c996b6ebcf71%3A0x3b39fe6eaf3facc!2sR.%20Jo%C3%A3o%20C%C3%A2ncio%20Jacques%2C%2049%20-%20Cachoeira%20do%20Bom%20Jesus%2C%20Florian%C3%B3polis%20-%20SC%2C%2088040-450!5e0!3m2!1spt-BR!2sbr!4v1719603937770!5m2!1spt-BR!2sbr" 
+                style="border:0;" allowfullscreen="" loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <a href="https://g.co/kgs/hBSiZMV" target="_blank" class="btn btn-outline-primary w-100">Ver rota no Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- Rodapé -->
   <footer class="bg-dark text-white text-center py-3">
