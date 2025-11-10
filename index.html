@@ -232,6 +232,79 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
+
+  <script>
+    // Coordenadas da Loja Costeira
+    const destino = {
+      lat: -27.601834,
+      lng: -48.494993
+    };
+  
+    /**
+     * Exibe a recomendação de forma assíncrona e suave
+     * @param {string} mensagem - texto da recomendação
+     */
+    async function mostrarRecomendacao(mensagem) {
+      const div = document.getElementById('recomendacao-costeira');
+      if (!div) return;
+  
+      // Espera breve para sincronizar com o carregamento do DOM
+      await new Promise(resolve => setTimeout(resolve, 200));
+  
+      div.textContent = mensagem;
+      div.classList.remove('d-none');
+    }
+  
+    /**
+     * Função principal que tenta obter a localização e exibir mensagem personalizada
+     */
+    async function calcularTempoDeRota() {
+      // Verifica suporte à geolocalização
+      if (!('geolocation' in navigator)) {
+        await mostrarRecomendacao(
+          'Venha nos visitar na loja da Costeira do Pirajubaé! Atendimento rápido e estacionamento fácil.'
+        );
+        return;
+      }
+  
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            const origem = `${position.coords.latitude},${position.coords.longitude}`;
+            const destinoCoord = `${destino.lat},${destino.lng}`;
+  
+            // Simulação de tempo de rota (sem API key exposta)
+            const tempoEstimado = 'alguns minutos';
+  
+            await mostrarRecomendacao(
+              `Você está a ${tempoEstimado} (aproximadamente) da nossa loja da Costeira do Pirajubaé. Venha nos visitar!`
+            );
+          } catch (error) {
+            console.error('Erro ao processar tempo de rota:', error);
+            await mostrarRecomendacao(
+              'Estamos te esperando na loja da Costeira do Pirajubaé! Atendimento rápido e especializado.'
+            );
+          }
+        },
+        async (error) => {
+          console.warn('Erro de geolocalização:', error);
+          // Mostra mensagem genérica se o usuário negar ou ocorrer erro
+          await mostrarRecomendacao(
+            'Venha nos visitar na loja da Costeira do Pirajubaé! Atendimento rápido e estacionamento gratuito.'
+          );
+        },
+        {
+          maximumAge: 60000, // reaproveita localização recente (até 1 min)
+          timeout: 5000      // tempo máximo de espera (5s)
+        }
+      );
+    }
+  
+    // Executa automaticamente após o carregamento do DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      calcularTempoDeRota();
+    });
+  </script>
+  
 </body>
 </html>
-
