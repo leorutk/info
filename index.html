@@ -50,45 +50,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
-
-<script>
-  // Coordenadas da Loja Costeira
-  const destino = {
-    lat: -27.601834,  // Latitude da loja
-    lng: -48.494993   // Longitude da loja
-  };
-
-  function mostrarRecomendacao(tempo) {
-    const div = document.getElementById('recomendacao-costeira');
-    div.textContent = `Você está a ${tempo} (aproximadamente) da nossa loja da Costeira do Pirajubaé. Venha nos visitar!`;
-    div.classList.remove('d-none');
-  }
-
-  // Verifica se o navegador suporta geolocalização
-  if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const origem = `${position.coords.latitude},${position.coords.longitude}`;
-      const destinoCoord = `${destino.lat},${destino.lng}`;
-
-      const endpoint = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destinoCoord}&key=SUA_API_KEY&language=pt-BR`;
-
-      // Por razões de segurança, essa requisição precisa passar por um servidor backend (por causa da key).
-      // Aqui vai um truque alternativo: redireciona para o Google Maps diretamente como fallback visual
-      const tempoEstimado = 'alguns minutos'; // Valor padrão, se API não for usada
-
-      mostrarRecomendacao(tempoEstimado);
-    }, () => {
-      // Erro ao localizar, mostra estimativa padrão
-      mostrarRecomendacao('menos de 20 minutos');
-    }, {
-      maximumAge: 60000, timeout: 5000
-    });
-  } else {
-    // Navegador não suporta geolocalização
-    mostrarRecomendacao('menos de 20 minutos');
-  }
-</script>
-
 <body>
 
   <!-- Menu de Navegação -->
@@ -308,3 +269,4 @@
   
 </body>
 </html>
+
