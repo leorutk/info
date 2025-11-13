@@ -2,6 +2,10 @@ body {
   scroll-behavior: smooth;
 }
 
+html, body {
+  overflow-x: hidden !important;
+}
+
 .whatsapp-float {
     position: fixed;
     bottom: 20px;
@@ -48,4 +52,45 @@ body {
 
 .navbar .nav-link:hover {
   color: #0d6efd;
+
+}
+
+.img-loja-sobreposta {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Efeito padrão (desktop/tablet) */
+.img-loja-sobreposta {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.img-loja-sobreposta:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* RESPONSIVIDADE */
+
+/* Telas médias (tablets) */
+@media (max-width: 992px) {
+  .img-loja-sobreposta {
+    margin-top: -90px !important; /* menos sobreposição */
+    max-width: 720px;
+  }
+}
+
+/* Telas pequenas (celulares grandes) */
+@media (max-width: 768px) {
+  .img-loja-sobreposta {
+    margin-top: -70px !important;
+    max-width: 90%;
+  }
+}
+
+/* Telas muito pequenas (iPhone SE, Android básico) */
+@media (max-width: 480px) {
+  .img-loja-sobreposta {
+    margin-top: -50px !important;
+    max-width: 95%;
+  }
 }
