@@ -97,10 +97,10 @@ html, body {
 
 /* Card de serviço em destaque */
 .destaque-card {
-  max-width: 600px;
+  max-width: 650px;
   border: 2px solid #ffc107;
   background: #fffbe6;
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -110,3 +110,18 @@ html, body {
   box-shadow: 0 12px 28px rgba(0,0,0,0.2);
 }
 
+/* Imagem maior e sempre centralizada */
+.img-destaque {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* No celular, reduz um pouco para não quebrar */
+@media (max-width: 480px) {
+  .img-destaque {
+    max-width: 250px;
+  }
+}
